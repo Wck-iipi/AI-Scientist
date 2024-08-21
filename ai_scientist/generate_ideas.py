@@ -490,6 +490,13 @@ if __name__ == "__main__":
         print(f"Using Anthropic API with model {args.model}.")
         client_model = "claude-3-5-sonnet-20240620"
         client = anthropic.Anthropic()
+
+    elif args.model.startswith("gemini"):
+        import google.generativeai as genai
+        client_model = args.model
+        print(f"Using Gemini API with model {args.model}")
+        client = genai.GenerativeModel(client_model)
+
     elif args.model.startswith("bedrock") and "claude" in args.model:
         import anthropic
 

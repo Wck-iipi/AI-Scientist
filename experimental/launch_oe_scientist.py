@@ -334,6 +334,13 @@ if __name__ == "__main__":
 
         print(f"Using Amazon Bedrock with model {client_model}.")
         client = anthropic.AnthropicBedrock()
+
+    elif args.model.startswith("gemini"):
+        import google.generativeai as genai
+        client_model = args.model
+        print(f"Using Gemini API with model {args.model}")
+        client = genai.GenerativeModel(client_model)
+
     elif args.model.startswith("vertex_ai") and "claude" in args.model:
         import anthropic
 

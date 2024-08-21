@@ -246,6 +246,11 @@ def review_single_paper(
 
         model = model.split("/")[-1]
         client = anthropic.AnthropicBedrock()
+    elif args.model.startswith("gemini"):
+        import google.generativeai as genai
+        client_model = args.model
+        print(f"Using Gemini API with model {args.model}")
+        client = genai.GenerativeModel(client_model)
     elif args.model.startswith("vertex_ai") and "claude" in args.model:
         import anthropic
 

@@ -537,7 +537,11 @@ if __name__ == "__main__":
             "vertex_ai/claude-3-opus@20240229",
             "vertex_ai/claude-3-5-sonnet@20240620",
             "vertex_ai/claude-3-sonnet@20240229",
-            "vertex_ai/claude-3-haiku@20240307"
+            "vertex_ai/claude-3-haiku@20240307",
+            # Gemini models
+            "gemini-1.5-pro",
+            "gemini-1.5-flash",
+            "gemini-1.0-pro",
         ],
         help="Model to use for AI Scientist.",
     )
@@ -548,6 +552,12 @@ if __name__ == "__main__":
         print(f"Using Anthropic API with model {args.model}.")
         client_model = "claude-3-5-sonnet-20240620"
         client = anthropic.Anthropic()
+    elif args.model.startswith("gemini"):
+        import google.generativeai as genai
+        client_model = args.model
+        print(f"Using Gemini API with model {args.model}")
+        client = genai.GenerativeModel(client_model)
+
     elif args.model.startswith("bedrock") and "claude" in args.model:
         import anthropic
 

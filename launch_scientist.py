@@ -62,6 +62,10 @@ def parse_arguments():
             "vertex_ai/claude-3-5-sonnet@20240620",
             "vertex_ai/claude-3-sonnet@20240229",
             "vertex_ai/claude-3-haiku@20240307",
+            # Gemini models
+            "gemini-1.5-pro",
+            "gemini-1.5-flash",
+            "gemini-1.0-pro",
         ],
         help="Model to use for AI Scientist.",
     )
@@ -337,6 +341,12 @@ if __name__ == "__main__":
 
         print(f"Using Vertex AI with model {client_model}.")
         client = anthropic.AnthropicVertex()
+
+    elif args.model.startswith("gemini"):
+        import google.generativeai as genai
+        client_model = args.model
+        print(f"Using Gemini API with model {args.model}")
+        client = genai.GenerativeModel(client_model)
     elif args.model == "gpt-4o-2024-05-13":
         import openai
 
